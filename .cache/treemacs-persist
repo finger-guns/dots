@@ -1,0 +1,6 @@
+* Emacs
+** emacs
+ - path :: ~/.config/emacs
+* Checker
+** checker
+ - path :: ~/Projects/Personal/StreamChecker/checker

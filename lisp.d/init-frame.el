@@ -10,6 +10,7 @@
   (blink-cursor-mode -1)
   (setq-default fill-column 110
                 display-fill-column-indicator-mode t)
+  (menu-bar-mode -1)
   )
 
 (use-package scroll-bar
@@ -23,9 +24,9 @@
   (set-face-attribute 'mode-line nil :font "Hack" :weight 'medium :height 130)
 
   ;; i need to see these.
-  (set-face-foreground 'flyspell-incorrect "purple")
-  (set-face-attribute 'flyspell-incorrect nil :box '(:line-width 2 :color "#33333"))
-  (set-face-attribute 'flyspell-incorrect-face nil :underline nil)
+  ;;(set-face-foreground 'flyspell-incorrect "purple")
+;;  (set-face-attribute 'flyspell-incorrect nil :box '(:line-width 2 :color "#33333"))
+;;  (set-face-attribute 'flyspell-incorrect-face nil :underline nil)
 
   (set-face-background 'cursor "#A9A9A9"))
 

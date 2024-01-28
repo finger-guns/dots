@@ -8,7 +8,11 @@
 
 (use-package general
   :after (evil)
-  :straight t)
+  :straight t
+  :config
+  (general-evil-setup t)
+  
+  )
 
 (provide 'init-general)
 ;;; init-general.el ends here.

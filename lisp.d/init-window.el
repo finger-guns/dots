@@ -6,27 +6,29 @@
 (use-package window
   :config
   (setq display-buffer-alist
-	'(("\\*\\(Flycheck\\|Flymake\\|Package-Lint\\|vc-git :\\).*"
-	   (display-buffer-in-side-window)
-	   (window-height . 0.16)
-	   (side . top)
-	   (slot . 0)
-	   (window-parameters . ((no-other-window . t))))
-	  ("^\\(\\*E?shell\\|vterm\\).*"
-	   (display-buffer-in-side-window)
-	   (window-height . 0.16)
-	   (side . bottom)
-	   (slot . 1))
-	  ("\\*Help.*"
-	   (display-buffer-in-side-window)
-	   (window-width . 0.20)
-	   (side . right)
-	   (slot . 0)
-	   (window-parameters . ((no-other-window . t)))))
-	'("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
-		 nil
-		 (window-parameters (mode-line-format . none))))
-  (set-fringe-mode 0))
+        (append
+         '(("\\*\\(Flycheck\\|Flymake\\|Package-Lint\\|vc-git :\\).*"
+            (display-buffer-in-side-window)
+            (window-height . 0.16)
+            (side . top)
+            (slot . 0)
+            (window-parameters . ((no-other-window . t))))
+           ("^\\(\\*E?shell\\|vterm\\).*"
+            (display-buffer-in-side-window)
+            (window-height . 0.16)
+            (side . bottom)
+            (slot . 1))
+           ("\\*Help.*"
+            (display-buffer-in-side-window)
+            (window-width . 0.20)
+            (side . right)
+            (slot . 0)
+            (window-parameters . ((no-other-window . t)))))
+         '(("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
+            nil
+            (window-parameters (mode-line-format . none))))))
+  )
+
 
 (use-package display-fill-column-indicator
   :hook (prog-mode . display-fill-column-indicator-mode)
@@ -50,8 +52,8 @@
   (setq ring-bell-function 'ignore)
 
   ;;; Smoth scroll.
-  ;; (setq scroll-preserve-screen-position t)
-  ;; (setq scroll-conservatively 101)
+ (setq scroll-preserve-screen-position t)
+  (setq scroll-conservatively 101)
 
   )
 

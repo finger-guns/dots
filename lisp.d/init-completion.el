@@ -56,9 +56,7 @@
 
 (use-package copilot
   :straight (:host github :repo "zerolfx/copilot.el" :files ("dist" "*.el"))
-  :hook ((elisp-mode . copilot-mode)
-	 (prog-mode . copilot-mode)
-	 (shell-mode . copilot-mode))
+  :hook (prog-mode . copilot-mode)
   :bind (
          ("M-y" . copilot-accept-completion-by-line)
          ("M-Y" . copilot-accept-completion)

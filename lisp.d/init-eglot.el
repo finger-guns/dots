@@ -3,6 +3,15 @@
 ;;; eglot is the new thing.
 
 
+(use-package dape
+  :straight (dape
+             :type git
+             :host github
+             :repo "svaante/dape")
+  :config
+  (setq dape-inline-variables t))
+
+
 (use-package eglot
   :hook (prog-mode . eglot-ensure)
   :general (
@@ -17,12 +26,13 @@
                     "a" 'eglot-code-actions
                     )
   :config
-  (add-to-list 'eglot-server-programs
-               '(svelte-mode . ("svelteserver" "--stdio")))
   (setq eglot-events-buffer-size 0)
   (setq eldoc-idle-delay 0.75)
   (advice-add #'eglot-completion-at-point :around #'cape-wrap-noninterruptible)
-  )
+  (setq eglot-extend-to-xref t)
+ )
+
+
 
 (use-package treesit-parser-manager
   :straight (treesit-parser-manager

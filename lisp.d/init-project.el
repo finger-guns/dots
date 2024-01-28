@@ -1,19 +1,25 @@
-;;; init-projectile.el --- finger__guns;
+;;; init-project.el --- finger__guns;
 ;;; Commentary:
 ;;; How to manage projects.
 ;;; Code:
 
 (use-package project
   :straight t
+  :general
+  (general-nvmap :prefix "C-x"
+    "pf" 'project-find-file)
   :init
-  (setq-default project-vc-ignores '("node_modules/" "bin/"))
   (defcustom project-root-markers
     '("go.mod" "go.sum" "Cargo.toml" "compile_commands.json" "compile_flags.txt"
-      "project.clj" ".git" "deps.edn" "shadow-cljs.edn" "tsconfig.json")
+      "project.clj" ".git" "deps.edn" "shadow-cljs.edn" "tsconfig.json" "pyproject.toml" ".project")
     "Files or directories that indicate the root of a project."
     :type '(repeat string)
     :group 'project)
 
+  (setq-default project-vc-ignores '("node_modules/" "bin/"))
+
+  :config
+  ;; Function to check the existence of a project marker in the given path
   (defun project-root-p (path)
     "Check if the current PATH has any of the project root markers."
     (catch 'found
@@ -21,11 +27,17 @@
 	(when (file-exists-p (concat path marker))
 	  (throw 'found marker)))))
 
+  ;; Function to find the root based on the project-root-markers
   (defun project-find-root (path)
     "Search up the PATH for `project-root-markers'."
     (when-let ((root (locate-dominating-file path #'project-root-p)))
       (cons 'transient (expand-file-name root))))
 
+  ;; Register the project-find-root function
+  (add-to-list 'project-find-functions #'project-find-root)
+
+
+  ;; Your custom buffer-saving functions and advice
   (defun project-save-some-buffers (&optional arg)
     "Save some modified file-visiting buffers in the current project.
     Optional argument ARG (interactively, prefix argument) non-nil
@@ -52,5 +64,5 @@
       (funcall fn edit-command)))
   )
 
-(provide 'init-projectile)
-;;; init-projectile.el ends here.
+(provide 'init-project)
+;;; init-project.el ends here.

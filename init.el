@@ -3,6 +3,8 @@
 ;;; What should emacs do on load, and how should it do it.
 ;;; Code:
 
+;;(setq debug-on-error t)
+
 ;;; Let emacs know where we are.
 (setq user-init-file (or load-file-name (buffer-file-name)))
 (setq user-emacs-directory (file-name-directory user-init-file))
@@ -91,6 +93,7 @@
 (require-init 'init-terraform)
 (require-init 'init-typescript)
 (require-init 'init-rust)
+(require-init 'init-ocaml)
  ;; (require-init 'init-modes-ill-rarely-use)
 ;;; }}}
 

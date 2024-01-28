@@ -11,7 +11,6 @@
     (which-function-mode -1)))
 
 (use-package prog-mode
-  :hook ( prog-mode . conditional-disable-modes )
   :init
   (setq-default indent-tabs-mode nil
                 tab-width 2

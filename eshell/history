@@ -1,2 +1,50 @@
 ls
 mkdir [id]
+ls
+cd ../
+touch queries/.empty
+tree
+tree -la
+touch insert.py
+touch update.py
+touch delete.py
+ls
+mkdir user
+mkdir workspace
+mkdir project
+touch insert.py
+touch delete.py
+touch update.py
+rg (menu-project)
+rg "(menu-project"
+rg "(menu-project)"
+mkdir user
+ls
+mv test_user_delete.py test_user_insert.py test_user_update.py ./user/ 
+ls
+tree
+rm -rf __pycache__/
+ls
+cd ../queries
+ls
+mkdir user
+ls
+cd user/ 
+touch test_user_get.py
+(concat (user-emacs-directory "hello"))
+locate-user-emacs-file .m2/ 
+(concat (locate-user-emacs-file "Hello"))
+(concat (user-emacs-directory "hello"))
+(esy/process-env-to-exec-path(esy/opam--process-environment-of-project(esy/project--of-path "/Users/finger__guns/projects/Personal/StreamChecker/stream_checker")))
+cd ../
+ls
+esy build
+esy dune build
+(require 'project)
+(project-root)
+(setq project-root "./")
+(project-root)
+(help project-root)
+ls
+mv credit_active.py credit_package.py credit_purchase.py ./credit/ 
+ls

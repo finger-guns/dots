@@ -24,8 +24,6 @@
 (use-package diminish
   :straight t)
 
-(use-package delight
-  :straight t)
 
 (use-package async
   :straight t
