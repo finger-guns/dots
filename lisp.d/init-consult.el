@@ -4,28 +4,15 @@
 ;;; Code:
 
 (use-package vertico
-  :straight t
+  :ensure t
   :init
   (vertico-mode))
 
 ;; Example configuration for Consult
 (use-package consult
-  :straight t
-  :bind (
-         ("C-x M-:" . consult-complex-command)
-         ("C-x b" . consult-buffer)
-         ("M-g e" . consult-compile-error)
-         ("M-g f" . consult-flymake)
-         ("M-g i" . consult-imenu)
-         ("M-g I" . consult-imenu-multi)
-         ("M-s d" . consult-find)
-         ("M-s D" . consult-locate)
-         ("M-s G" . consult-git-grep)
-         ("M-s r" . consult-ripgrep)
-         ("M-s l" . consult-line)
-         ("M-s L" . consult-line-multi))
-
-  ;; :hook (completion-list-mode . consult-preview-at-point-mode)
+  :ensure t
+  :demand t
+  :hook (completion-list-mode . consult-preview-at-point-mode)
   :init
   (setq register-preview-delay 0.5
         register-preview-function #'consult-register-format)
@@ -47,17 +34,18 @@
 )
 
 (use-package embark-consult
-  :straight t
+  :ensure t
   :after (embark consult)
   :hook
   (embark-collect-mode . consult-preview-at-point-mode))
 
-(use-package deadgrep
-  :straight t
-  :general (:keymaps '(normal)
-                     "M-s g" 'deadgrep)
-  :init
-  (evil-set-initial-state 'deadgrep-mode 'emacs))
+;(use-package deadgrep
+;  :ensure t
+;  :demand t
+;  :general (:states 'normal :prefix "SPC" 
+;                     "g" 'deadgrep)
+;  :init
+;  (evil-set-initial-state 'deadgrep-mode 'emacs))
 
 (provide 'init-consult)
 ;;; init-consult.el ends here.

@@ -4,10 +4,8 @@
 ;;; Code:
 
 (use-package project
-  :straight t
-  :general
-  (general-nvmap :prefix "C-x"
-    "pf" 'project-find-file)
+  :ensure t
+  :demand t
   :init
   (defcustom project-root-markers
     '("go.mod" "go.sum" "Cargo.toml" "compile_commands.json" "compile_flags.txt"
@@ -16,9 +14,11 @@
     :type '(repeat string)
     :group 'project)
 
-  (setq-default project-vc-ignores '("node_modules/" "bin/"))
-
+  (setq-default project-vc-ignores '("node_modules/" "bin/" "**/node_modules/**" "node_modules" "build" "stubs"))
   :config
+  (setq project-mode-line t)
+  (advice-add #'project-find-regexp :override #'consult-ripgrep)
+  (advice-add #'project-find-file :override #'consult-find)
   ;; Function to check the existence of a project marker in the given path
   (defun project-root-p (path)
     "Check if the current PATH has any of the project root markers."

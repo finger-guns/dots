@@ -4,7 +4,7 @@
 ;;; Code:
 
 (use-package flymake
-  :straight t
+  :ensure t
   :after (eglot)
   :hook (prog-mode . flymake-mode)
   :bind (:map flymake-mode-map

@@ -4,15 +4,16 @@
 ; Code:
 
 (use-package cape
-  :straight t)
+  :ensure t)
 
 (use-package corfu
-  :straight t
+  :ensure t
   :custom
   (corfu-cycle t)
   (corfu-auto t)
   (corfu-separator ?\s)
   (corfu-preview-current nil)
+  (corfu-quit-no-match 'separator)
   (corfu-preselect-first nil)
   (corfu-on-exact-match nil)
   (corfu-echo-documentation nil)
@@ -21,15 +22,7 @@
   (corfu-auto-delay 0.25)
   (corfu-min-width 80)
   (corfu-max-width corfu-min-width)
-  :general (
-            :keymaps '(normal insert)
-                     :keymaps 'overide
-                     "C-n" 'corfu-next
-                     "C-p" 'corfu-previous
-                     "C-g" 'corfu-quit
-            :keymaps 'corfu-map
-                      "SPC" 'corfu-insert-separator)
-  
+  (corfu-preselect 'prompt)
   :hook ((elisp-mode . corfu-mode)
 	 (prog-mode . corfu-mode)
 	 (shell-mode . corfu-mode)
@@ -41,22 +34,23 @@
 	read-extended-command-predicate #'command-completion-default-include-p))
 
 (use-package orderless
-  :straight t
+  :ensure t
   :init
   (setq completion-styles '(orderless partial-completion basic)
 	completion-category-defaults nil
 	completion-category-overrides nil))
 
 (use-package dash
-  :straight t)
+  :ensure t)
 
 (use-package s
-  :straight t)
+  :ensure t)
 
 
 (use-package copilot
+  :ensure t
   :straight (:host github :repo "zerolfx/copilot.el" :files ("dist" "*.el"))
-  :hook (prog-mode . copilot-mode)
+  ;; :hook (prog-mode . copilot-mode)
   :bind (
          ("M-y" . copilot-accept-completion-by-line)
          ("M-Y" . copilot-accept-completion)
@@ -64,23 +58,15 @@
          ("M-K" . copilot-previous-completion)
          ("M->" . copilot-next-completion)
          ("M-<" . copilot-previous-completion)
+         )
   )
 
-)
-
 (use-package kind-icon
-  :straight t
+  :ensure t
   :diminish t
   :after corfu
   :custom
   (kind-icon-use-icons t))
-
-;; (use-package tabnine-capf
-;;   :after cape
-;;   :straight (:host github :repo "50ways2sayhard/tabnine-capf" :files ("*.el" "*.sh"))
-;;   :hook (kill-emacs . tabnine-capf-kill-process)
-;;   :config
-;;   (add-to-list 'completion-at-point-functions #'tabnine-completion-at-point))
 
 (provide 'init-completion)
 ; init-completion.el ends here.

@@ -1,0 +1,1 @@
+/Users/finger__guns/.config/emacs/elpaca/repos/emacs-python-isort/python-isort.el

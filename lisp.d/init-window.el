@@ -42,9 +42,26 @@
 
 (use-package custom
   :init
-  (add-to-list 'custom-theme-load-path (concat user-emacs-directory "/themes.d/"))
+  (add-to-list 'custom-theme-load-path (concat user-emacs-directory "themes.d/"))
   :config
-  (load-theme 'modus-vivendi t)
+  (load-theme 'modus-vivendi-tritanopia t)
+  (setq modus-themes-mode-line '(accented borderless)
+        modus-themes-bold-constructs t
+        modus-themes-italic-constructs t
+        modus-themes-fringes 'subtle
+        modus-themes-tabs-accented t
+        modus-themes-paren-match '(bold intense)
+        modus-themes-prompts '(bold intense)
+        modus-themes-completions 'opinionated
+        modus-themes-org-blocks 'tinted-background
+        modus-themes-scale-headings t
+        modus-themes-region '(bg-only)
+        modus-themes-headings
+        '((1 . (rainbow overline background 1.4))
+          (2 . (rainbow background 1.3))
+          (3 . (rainbow bold 1.2))
+          (t . (semilight 1.1))))
+
 
   (setq-default display-line-numbers 'relative
 		display-line-numbers-width 4)

@@ -4,7 +4,7 @@
 ;;; Code:
 
 (use-package terraform-mode
-  :straight t)
+  :ensure t)
 
 
 (provide 'init-terraform)

@@ -48,3 +48,63 @@ esy dune build
 ls
 mv credit_active.py credit_package.py credit_purchase.py ./credit/ 
 ls
+(straight-use-package '(lsp-tailwindcss :type git :host github :repo "merrickluo/lsp-tailwindcss"))
+(M-x)
+ls
+mv test.py scripts/request_downloader.py
+ls
+cd ../
+mkdir Sidebar
+mv navigation/Sidebar.svelte  ./Sidebar/ 
+ls
+mv Sidebar/ sidebare
+mv sidebare/ sidebar
+mv context.tsx ../
+(treesit-language-available-p 'python)
+ls
+ls
+cd repos/
+ls
+rm -rf gleam-mode/
+git clone --recurse-submodules git@github.com:gleam-lang/gleam-mode
+ls
+rm -rf tree-sitter-gleam/
+ls
+gleam new whereisit
+git add .
+git init
+git add .
+rm -rf .git/
+ls
+cd whereisit/
+ls
+git init
+git add .
+git commit -m "ignore"
+(unbind-key "C-h")
+ls
+mv preperation.py insert.py
+ls
+cd ../
+ls
+cd services/
+mv database ../utils/
+(treesit-language-available-p 'python)
+(treesit-language-available-p 'go)
+(treesit-language-available-p 'go)
+(treesit-language-available-p 'go-lang)
+(treesit-language-available-p 'go-mode)
+ls
+cd ../
+ls
+cd tree-sitter/ 
+ls
+tree -la
+│   │   ├── pre-merge-commit.sample
+clear
+tree
+ls
+poetry init
+ls
+mkdir api
+touch api/main.py

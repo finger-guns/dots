@@ -4,35 +4,36 @@
 ;;; and setup diminish.
 
 ;;; Bootstrap straight.el
-(defvar bootstrap-version)
-(let ((bootstrap-file
-       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
-      (bootstrap-version 5))
-  (unless (file-exists-p bootstrap-file)
-    (with-current-buffer
-	(url-retrieve-synchronously
-	 "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
-	 'silent 'inhibit-cookies)
-      (goto-char (point-max))
-      (eval-print-last-sexp)))
-  (load bootstrap-file nil 'nomessage))
 
-(straight-use-package 'use-package)
-(setq use-package-verbose t)
+;; (defvar bootstrap-version)
+;; (let ((bootstrap-file
+;;        (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+;;       (bootstrap-version 5))
+;;   (unless (file-exists-p bootstrap-file)
+;;     (with-current-buffer
+;; 	(url-retrieve-synchronously
+;; 	 "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+;; 	 'silent 'inhibit-cookies)
+;;       (goto-char (point-max))
+;;       (eval-print-last-sexp)))
+;;   (load bootstrap-file nil 'nomessage))
+
+;; (straight-use-package 'use-package)
+;; (setq use-package-verbose t)
 
 
 (use-package diminish
-  :straight t)
+  :ensure t)
 
 
 (use-package async
-  :straight t
+  :ensure t
   :init
   (dired-async-mode 1)
   (async-bytecomp-package-mode 1))
 
 (use-package exec-path-from-shell
-  :straight t
+  :ensure t
   :if (memq window-system '(mac ns x))
   :config
   (setq exec-path-from-shell-variables '("PATH" "GOPATH"))

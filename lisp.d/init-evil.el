@@ -4,13 +4,15 @@
 ;;; Code:
 
 (use-package evil
-  :straight t
+  :ensure t
+  :demand t
   :bind (
          ("C-u" . evil-scroll-up)
          ("C-d" . evil-scroll-down))
   :config
   (unbind-key "C-z" evil-normal-state-map)
   (define-key evil-motion-state-map (kbd "C-z") 'nil)
+  (define-key evil-motion-state-map (kbd ",") 'nil)
   (define-key evil-emacs-state-map (kbd "C-z") 'nil)
   (define-key evil-motion-state-map (kbd "C-x C-z") nil)
   (define-key evil-emacs-state-map (kbd "C-x C-z") 'nil)
@@ -20,17 +22,20 @@
         evil-split-window-below t
         evil-shift-width 2
         evil-shift-round t
-        evil-want-C-u-scroll t))
+        evil-want-C-u-scroll t
+        evil-disable-insert-state-bindings t
+        evil-want-Y-yank-to-eol t
+        ))
 
 (use-package evil-commentary
   :diminish evil-commentary-mode
-  :straight t
+  :ensure t
   :after evil
   :config
   (evil-commentary-mode))
 
 (use-package evil-surround
-  :straight t
+  :ensure t
   :after evil
   :config
   (global-evil-surround-mode))

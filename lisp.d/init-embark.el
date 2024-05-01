@@ -4,11 +4,8 @@
 ;;; Code:
 
 (use-package embark
-  :straight t
-  :bind(
-	("C-;" . embark-act)
-	("C-." . embark-dwim)
-	("C-h B" . embark-bindings))
+  :ensure t
+  :demand t
   :init
   (setq prefix-help-command #'embark-prefix-help-command))
 

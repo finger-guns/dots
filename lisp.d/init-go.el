@@ -4,7 +4,7 @@
 ;;; Code
 
 (use-package go-mode
-  :straight t
+  :ensure t
   :hook (go-mode . hs-minor-mode)
   :config
   ;; (add-hook 'eglot-managed-mode-hook (lambda ()

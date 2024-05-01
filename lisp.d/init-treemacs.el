@@ -4,7 +4,7 @@
 ;;; Code:
 
 (use-package treemacs
-  :straight t
+  :ensure t
   :config
   (setq treemacs-width 35)
   (setq treemacs-follow-mode t)
@@ -26,7 +26,7 @@
 
 (use-package treemacs-evil
   :after (treemacs evil)
-  :straight t)
+  :ensure t)
 
 
 (provide 'init-treemacs)

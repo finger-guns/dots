@@ -3,7 +3,7 @@
 ;;; eldoc.
 
 (use-package eldoc-box
-  :straight t
+  :ensure t
   :diminish "e"
   :hook ((eldoc-mode . eldoc-box-hover-mode)
          (eglot--managed-mode . eldoc-box-hover-mode))

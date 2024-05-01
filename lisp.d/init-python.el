@@ -6,13 +6,13 @@
 (setq major-mode-remap-alist
       '((python-mode . python-ts-mode)))
 
-(use-package pyvenv
-  :straight t
-  :hook (python-ts-mode . pyvenv-mode))
+;; (use-package pyvenv
+;;   :ensure t
+;;   :hook (python-mode . pyvenv-mode))
 
 (use-package blacken
-  :straight t
-  :hook (python-mode-ts-mode . blacken-mode)
+  :ensure t
+  :hook (python-ts-mode . blacken-mode)
   :commands blacken-buffer)
 
 (use-package python
@@ -22,18 +22,58 @@
   (setq python-shell-interpreter "ipython")
   (setq python-indent-guess-indent-offset t
         python-indent-guess-indent-offset-verbose nil)
-  )
+  :config
+  ;; (setq-default eglot-workspace-configuration
+  ;;               '((:pylsp . (:configurationSources ["flake8"]
+  ;;                            :plugins (
+  ;;                                      :pycodestyle (:enabled :json-false)
+  ;;                                      :mccabe (:enabled :json-false)
+  ;;                                      :pyflakes (:enabled :json-false)
+  ;;                                      :flake8 (:enabled :json-false
+  ;;                                               :maxLineLength 88)
+  ;;                                      :ruff (:enabled t
+  ;;                                             :lineLength 88)
+  ;;                                      :pydocstyle (:enabled t
+  ;;                                                   :convention "numpy")
+  ;;                                      :yapf (:enabled :json-false)
+  ;;                                      :autopep8 (:enabled :json-false)
+  ;;                                      :black (:enabled t
+  ;;                                              :line_length 88
+  ;;                                              :cache_config t)))))))
+(setq-default eglot-workspace-configuration
+              '((:pylsp . (:configurationSources ["flake8"]
+                           :plugins (
+                                     :pycodestyle (:enabled :json-false)
+                                     :mccabe (:enabled :json-false)
+                                     :pyflakes (:enabled :json-false)
+                                     :flake8 (:enabled :json-false
+                                              :maxLineLength 88)
+                                     :ruff (:enabled t
+                                            :lineLength 88)
+                                     :pydocstyle (:enabled t
+                                                  :convention "numpy"
+                                                  :addIgnore ["D100" "D101" "D102" "D103" "D104" "D105"])
+                                     :yapf (:enabled :json-false)
+                                     :autopep8 (:enabled :json-false)
+                                     :black (:enabled t
+                                             :line_length 88
+                                             :cache_config t)
+                                     :mypy (:enabled t
+                                                     :followImports "silent")
+                                     :jedi_hover (:enabled t)
+                                     ))))))
+
 
 (use-package poetry
-  :straight t
+  :ensure t
   :after (python-ts-mode))
 
 (use-package python-isort
-  :straight t
-  :hook (python-ts-mode . python-isort-on-save-mode))
+  :ensure t
+  :hook (python-mode . python-isort-on-save-mode))
 
 (use-package python-pytest
-  :straight t)
+  :ensure t)
 
 (provide 'init-python)
 ;;; init-python.el ends here.

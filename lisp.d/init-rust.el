@@ -4,17 +4,17 @@
 ;;; Code:
 
 (use-package rust-mode
-  :straight t
+  :ensure t
   :mode ("\\.rs\\'" . rust-mode)
   :config
   (setq rust-format-on-save t))
 
 (use-package cargo
-  :straight t
+  :ensure t
   :hook (rust-mode . cargo-minor-mode))
 
 (use-package toml-mode
-  :straight t
+  :ensure t
   :mode ("\\.toml\\'" . toml-mode))
 
 (provide 'init-rust)

@@ -6,14 +6,31 @@
 
 
 (use-package lsp-mode
-  :straight t)
+  :ensure t)
 
-(use-package svelte-mode
-  :straight t
-  :hook (svelte-mode . add-node-modules-path)
+(use-package web-mode
+  :ensure t
+  :mode (".twig$" ".html?$" ".hbs$" ".vue$" ".blade.php$" ".svelte$" )
   :config
-  (setq svelte-basic-offset 2)
+  (setq
+   web-mode-markup-indent-offset 2
+   web-mode-css-indent-offset 2
+   web-mode-code-indent-offset 2
+   web-mode-style-padding 2
+   web-mode-script-padding 2
+   web-mode-enable-auto-closing t
+   web-mode-enable-auto-opening t
+   web-mode-enable-auto-pairing t
+   web-mode-enable-auto-indentation t)
   )
+
+;; (use-package svelte-mode
+;;   :ensure t
+;;   :hook (svelte-mode . add-node-modules-path)
+;;   :init
+;;   (lsp-mode)
+;;   :config
+;;   (setq svelte-basic-offset 2))
 
 (defun add-node-modules-path ()
   "Add node_modules/.bin to exec-path for the current project."
@@ -28,12 +45,13 @@
 
 (use-package typescript-ts-mode
   :mode ("\\.ts\\'" . typescript-ts-mode)
+  :mode ("\\.tsx\\'" . tsx-ts-mode)
   :init
-  (setq typescript-indent-level 2)
-  (add-to-list 'eglot-server-programs '(typescript-mode . ("typescript-language-server" "--stdio"))))
+  (setq typescript-indent-level 2))
+;;  (add-to-list 'eglot-server-programs '(typescript-mode . ("typescript-language-server" "--stdio"))))
 
 (use-package vue-mode
-  :straight t)
+  :ensure t)
 
 
 (provide 'init-typescript)

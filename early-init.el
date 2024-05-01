@@ -36,14 +36,14 @@
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 (defvar config-default-gc-threshold 200000000)
 
-;; (defun config--inhibit-gc ()
-;;   (setq gc-cons-threshold most-positive-fixnum))
+(defun config--inhibit-gc ()
+  (setq gc-cons-threshold most-positive-fixnum))
 
-;; (defun config--enable-gc ()
-;;   (setq gc-cons-threshold config-default-gc-threshold))
+(defun config--enable-gc ()
+  (setq gc-cons-threshold config-default-gc-threshold))
 
-;; (add-hook 'minibuffer-setup-hook #'config--inhibit-gc)
-;; (add-hook 'minibuffer-exit-hook #'config--enable-gc)
+(add-hook 'minibuffer-setup-hook #'config--inhibit-gc)
+(add-hook 'minibuffer-exit-hook #'config--enable-gc)
 
 (provide 'early-init)
 ;;; early-init.el ends here.

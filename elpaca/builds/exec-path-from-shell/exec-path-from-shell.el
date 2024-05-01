@@ -1,0 +1,1 @@
+/Users/finger__guns/.config/emacs/elpaca/repos/exec-path-from-shell/exec-path-from-shell.el
