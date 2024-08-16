@@ -38,7 +38,6 @@
   :hook (tuareg-mode . utop-minor-mode))
 
 (use-package merlin
-  :ensure t
   :after tuareg
   :hook ((tuareg-mode . merlin-mode)))
 

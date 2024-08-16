@@ -18,11 +18,10 @@
   :defer t
   :ensure t)
 
-;; (use-package gleam-mode
-;;   :straight (gleam-mode :type git :host github :repo "gleam-lang/gleam-mode" :branch "gleam-ts-mode")
-;;   :mode "\\.gleam\\'"
-;;   :config
-;;   (whitespace-mode t))
+(use-package gleam-ts-mode
+  :straight (:host github :repo "gleam-lang/gleam-mode")
+  :mode ("\\.gleam\\'" . gleam-ts-mode))
+  )
 
 (load (expand-file-name "~/.quicklisp/slime-helper.el"))
 (setq inferior-lisp-program "sbcl")

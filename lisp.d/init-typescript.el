@@ -5,9 +5,6 @@
 
 
 
-(use-package lsp-mode
-  :ensure t)
-
 (use-package web-mode
   :ensure t
   :mode (".twig$" ".html?$" ".hbs$" ".vue$" ".blade.php$" ".svelte$" )
@@ -42,13 +39,34 @@
           (setenv "PATH" (concat node-modules-bin ":" (getenv "PATH")))
           (setq exec-path (append (list node-modules-bin) exec-path)))))))
 
+(use-package treesit
+  :preface
+  (defun mp-setup-install-grammars ()
+    "Install Tree-sitter grammars if they are absent."
+    (interactive)
+    (dolist (grammar
+             '((tsx . ("https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src"))
+               (typescript . ("https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src"))
+               (yaml . ("https://github.com/ikatyang/tree-sitter-yaml" "master"))))
+      (add-to-list 'treesit-language-source-alist grammar)
+      (unless (treesit-language-available-p (car grammar))
+        (treesit-install-language-grammar (car grammar)))))
+  )
+
+(use-package prettier
+  :ensure t
+  :hook ((typescript-ts-mode . prettier-mode)
+         (tsx-ts-mode . prettier-mode)))
 
 (use-package typescript-ts-mode
   :mode ("\\.ts\\'" . typescript-ts-mode)
+  :config
+  (setq typescript-ts-mode-indent-offset 4))
+
+(use-package tsx-ts-mode
   :mode ("\\.tsx\\'" . tsx-ts-mode)
-  :init
-  (setq typescript-indent-level 2))
-;;  (add-to-list 'eglot-server-programs '(typescript-mode . ("typescript-language-server" "--stdio"))))
+  :config
+  (setq typescript-ts-mode-indent-offset 4))
 
 (use-package vue-mode
   :ensure t)

@@ -14,8 +14,8 @@
     :type '(repeat string)
     :group 'project)
 
-  (setq-default project-vc-ignores '("node_modules/" "bin/" "**/node_modules/**" "node_modules" "build" "stubs"))
   :config
+  (setq project-vc-ignores '("node_modules/" "bin/" "**/node_modules/**" "node_modules" "build" "stubs"))
   (setq project-mode-line t)
   (advice-add #'project-find-regexp :override #'consult-ripgrep)
   (advice-add #'project-find-file :override #'consult-find)

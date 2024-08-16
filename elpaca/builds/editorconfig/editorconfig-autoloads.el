@@ -9,12 +9,6 @@
 
 ;;; Generated autoloads from editorconfig.el
 
-(autoload 'editorconfig-apply "editorconfig" "\
-Get and apply EditorConfig properties to current buffer.
-
-This function does not respect the values of `editorconfig-exclude-modes' and
-`editorconfig-exclude-regexps' and always applies available properties.
-Use `editorconfig-mode-apply' instead to make use of these variables." t)
 (defvar editorconfig-mode nil "\
 Non-nil if Editorconfig mode is enabled.
 See the `editorconfig-mode' command
@@ -44,13 +38,6 @@ The mode's hook is called both when the mode is enabled and when it is
 disabled.
 
 (fn &optional ARG)" t)
-(autoload 'editorconfig-find-current-editorconfig "editorconfig" "\
-Find the closest .editorconfig file for current file." t)
-(autoload 'editorconfig-display-current-properties "editorconfig" "\
-Display EditorConfig properties extracted for current buffer." t)
-(defalias 'describe-editorconfig-properties 'editorconfig-display-current-properties)
-(autoload 'editorconfig-format-buffer "editorconfig" "\
-Format buffer according to .editorconfig indent_style and indent_width." t)
 (autoload 'editorconfig-version "editorconfig" "\
 Get EditorConfig version as string.
 
@@ -125,6 +112,24 @@ be used:
 
 (fn STRING PATTERN)")
 (register-definition-prefixes "editorconfig-fnmatch" '("editorconfig-fnmatch-"))
+
+
+;;; Generated autoloads from editorconfig-tools.el
+
+(autoload 'editorconfig-apply "editorconfig-tools" "\
+Get and apply EditorConfig properties to current buffer.
+
+This function does not respect the values of `editorconfig-exclude-modes' and
+`editorconfig-exclude-regexps' and always applies available properties.
+Use `editorconfig-mode-apply' instead to make use of these variables." t)
+(autoload 'editorconfig-find-current-editorconfig "editorconfig-tools" "\
+Find the closest .editorconfig file for current file." t)
+(autoload 'editorconfig-display-current-properties "editorconfig-tools" "\
+Display EditorConfig properties extracted for current buffer." t)
+(defalias 'describe-editorconfig-properties 'editorconfig-display-current-properties)
+(autoload 'editorconfig-format-buffer "editorconfig-tools" "\
+Format buffer according to .editorconfig indent_style and indent_width." t)
+(register-definition-prefixes "editorconfig-tools" '("editorconfig-mode-apply"))
 
 ;;; End of scraped data
 

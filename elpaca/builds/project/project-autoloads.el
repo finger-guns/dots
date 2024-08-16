@@ -197,9 +197,11 @@ is non-nil, the command will not ask the user for confirmation.
 NO-CONFIRM is always nil when the command is invoked
 interactively.
 
+If PROJECT is non-nil, kill buffers for that project instead.
+
 Also see the `project-kill-buffers-display-buffer-list' variable.
 
-(fn &optional NO-CONFIRM)" t)
+(fn &optional NO-CONFIRM PROJECT)" t)
 (autoload 'project-remember-project "project" "\
 Add project PR to the front of the project list.
 Save the result in `project-list-file' if the list of projects

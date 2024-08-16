@@ -14,6 +14,7 @@
 
 ;;; Generated autoloads from lsp-ada.el
 
+(put 'lsp-ada-project-file 'safe-local-variable 'stringp)
 (register-definition-prefixes "lsp-ada" '("lsp-ada-"))
 
 
@@ -235,6 +236,11 @@ disabled.
 ;;; Generated autoloads from lsp-dot.el
 
 (register-definition-prefixes "lsp-dot" '("lsp-dot--dot-ls-server-command"))
+
+
+;;; Generated autoloads from lsp-earthly.el
+
+(register-definition-prefixes "lsp-earthly" '("lsp-earthly-"))
 
 
 ;;; Generated autoloads from lsp-elixir.el
@@ -496,6 +502,11 @@ Start the alive-lsp." t)
 (register-definition-prefixes "lsp-mdx" '("lsp-mdx-server-command"))
 
 
+;;; Generated autoloads from lsp-meson.el
+
+(register-definition-prefixes "lsp-meson" '("lsp-meson-"))
+
+
 ;;; Generated autoloads from lsp-mint.el
 
 (register-definition-prefixes "lsp-mint" '("lsp-clients-mint-executable"))
@@ -741,6 +752,11 @@ disabled.
 (register-definition-prefixes "lsp-rf" '("expand-start-command" "lsp-rf-language-server-" "parse-rf-language-server-"))
 
 
+;;; Generated autoloads from lsp-roslyn.el
+
+(register-definition-prefixes "lsp-roslyn" '("lsp-roslyn-"))
+
+
 ;;; Generated autoloads from lsp-rpm-spec.el
 
 (register-definition-prefixes "lsp-rpm-spec" '("lsp-rpm-spec-"))
@@ -840,6 +856,11 @@ disabled.
 ;;; Generated autoloads from lsp-sorbet.el
 
 (register-definition-prefixes "lsp-sorbet" '("lsp-sorbet-"))
+
+
+;;; Generated autoloads from lsp-sql.el
+
+(register-definition-prefixes "lsp-sql" '("lsp-sql-"))
 
 
 ;;; Generated autoloads from lsp-sqls.el

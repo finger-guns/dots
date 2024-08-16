@@ -108,3 +108,15 @@ poetry init
 ls
 mkdir api
 touch api/main.py
+ls
+mv swap_background_request.py swap_background.py
+ls
+mv user_schema.py user.py
+ls
+mv start.sh ../
+ls
+Boards  CreateBoard.tsx  Navbar.tsxcode
+code .
+ls
+touch index.ts
+touch commands.ts queries.ts

@@ -1,9 +1,3 @@
-~/Projects/Personal/F35/goes_missing/api/operations/commands/project
-~/Projects/Personal/F35/goes_missing/api/operations/queries
-~/Projects/Personal/F35/goes_missing/api/operations/commands/task
-~/.config/emacs/lisp.d
-~/.config/emacs
-~/Projects/Personal/SupermarineSpitfire/plane/tests/operations/commands
 /Users/finger__guns/Projects/Personal/SupermarineSpitfire/plane/tests/operations/queries
 /Users/finger__guns/Projects/Personal/SupermarineSpitfire/plane/tests/operations/queries/user
 ~
@@ -31,3 +25,9 @@
 /Users/finger__guns/.config/emacs/tree-sitter
 ~/Projects/Personal/Coupon/coupon_hawk/scraper
 ~/Projects/Personal/Coupon/coupon_hawk/loader
+/Users/finger__guns/Projects/Personal/Reviewer/reviewerapi
+~/Projects/Work/Picjam/v2/picback/pic/api/models/editor
+~/Projects/Work/Picjam/v2/picback/pic/api/schema/payload
+~/Projects/Work/Picjam/v2/picjam-queue-worker/worker
+~/Projects/Personal/Storyboard/story/src/components
+~/Projects/Personal/Storyboard/story/src/api/asset

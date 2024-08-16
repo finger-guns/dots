@@ -16,52 +16,14 @@
   :commands blacken-buffer)
 
 (use-package python
-  :hook (python-ts-mode . poetry-tracking-mode)
+  :hook ((python-ts-mode . poetry-tracking-mode)
+         (python-ts-mode . flyspell-prog-mode)
+         (python-ts-mode . hs-minor-mode))
   :init
   (setq python-indent-def-block-scale 1)
   (setq python-shell-interpreter "ipython")
   (setq python-indent-guess-indent-offset t
-        python-indent-guess-indent-offset-verbose nil)
-  :config
-  ;; (setq-default eglot-workspace-configuration
-  ;;               '((:pylsp . (:configurationSources ["flake8"]
-  ;;                            :plugins (
-  ;;                                      :pycodestyle (:enabled :json-false)
-  ;;                                      :mccabe (:enabled :json-false)
-  ;;                                      :pyflakes (:enabled :json-false)
-  ;;                                      :flake8 (:enabled :json-false
-  ;;                                               :maxLineLength 88)
-  ;;                                      :ruff (:enabled t
-  ;;                                             :lineLength 88)
-  ;;                                      :pydocstyle (:enabled t
-  ;;                                                   :convention "numpy")
-  ;;                                      :yapf (:enabled :json-false)
-  ;;                                      :autopep8 (:enabled :json-false)
-  ;;                                      :black (:enabled t
-  ;;                                              :line_length 88
-  ;;                                              :cache_config t)))))))
-(setq-default eglot-workspace-configuration
-              '((:pylsp . (:configurationSources ["flake8"]
-                           :plugins (
-                                     :pycodestyle (:enabled :json-false)
-                                     :mccabe (:enabled :json-false)
-                                     :pyflakes (:enabled :json-false)
-                                     :flake8 (:enabled :json-false
-                                              :maxLineLength 88)
-                                     :ruff (:enabled t
-                                            :lineLength 88)
-                                     :pydocstyle (:enabled t
-                                                  :convention "numpy"
-                                                  :addIgnore ["D100" "D101" "D102" "D103" "D104" "D105"])
-                                     :yapf (:enabled :json-false)
-                                     :autopep8 (:enabled :json-false)
-                                     :black (:enabled t
-                                             :line_length 88
-                                             :cache_config t)
-                                     :mypy (:enabled t
-                                                     :followImports "silent")
-                                     :jedi_hover (:enabled t)
-                                     ))))))
+        python-indent-guess-indent-offset-verbose nil))
 
 
 (use-package poetry

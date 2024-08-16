@@ -68,5 +68,11 @@
   :custom
   (kind-icon-use-icons t))
 
+(use-package tempel
+  :ensure t
+  :custom
+  (tempel-trigger-prefix "<")
+  :bind ("C-<" . tempel-insert))
+
 (provide 'init-completion)
 ; init-completion.el ends here.

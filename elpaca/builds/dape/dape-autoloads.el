@@ -9,6 +9,7 @@
 
 ;;; Generated autoloads from dape.el
 
+(put 'dape-command 'safe-local-variable #'listp)
 (autoload 'dape "dape" "\
 Start debugging session.
 Start a debugging session for CONFIG.
