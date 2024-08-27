@@ -1,9 +1,9 @@
 ;;; -*- lisp-data -*-
 (("/Users/finger__guns/Projects/Work/Picjam/v2/picback/pic/")
- ("/Users/finger__guns/Projects/Work/Appnative/Goodpods/goodpods_api/")
- ("/Users/finger__guns/Projects/Personal/Storyboard/story/")
  ("/Users/finger__guns/Projects/Work/Picjam/v2/picjam-queue-worker/")
+ ("/Users/finger__guns/Projects/Personal/Storyboard/story/")
  ("/Users/finger__guns/Projects/Personal/Storyboard/Board/") ("/Users/finger__guns/.config/emacs/")
+ ("/Users/finger__guns/Projects/Work/Appnative/Goodpods/goodpods_api/")
  ("/Users/finger__guns/Projects/Personal/Reviewer/reviewer_api/")
  ("/Users/finger__guns/Projects/Work/Picjam/v2/picedit/")
  ("/Users/finger__guns/Projects/Work/Picjam/prompter/")

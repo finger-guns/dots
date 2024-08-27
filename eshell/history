@@ -120,3 +120,4 @@ code .
 ls
 touch index.ts
 touch commands.ts queries.ts
+touch index.ts queries.ts commands.ts

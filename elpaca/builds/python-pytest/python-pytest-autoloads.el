@@ -51,18 +51,27 @@ Additional ARGS are passed along to pytest.
 With a prefix argument, allow editing.
 
 (fn DIRECTORIES &optional ARGS)" t)
-(autoload 'python-pytest-function "python-pytest" "\
+(autoload 'python-pytest-run-def-at-point-treesit "python-pytest" "\
+Run def at point." t)
+(autoload 'python-pytest-run-class-at-point-treesit "python-pytest" "\
+Run class at point." t)
+(autoload 'python-pytest-run-def-or-class-at-point "python-pytest" "\
 Run pytest on FILE with FUNC (or class).
 
 Additional ARGS are passed along to pytest.
 With a prefix argument, allow editing.
 
 (fn FILE FUNC ARGS)" t)
-(autoload 'python-pytest-function-dwim "python-pytest" "\
-Run pytest on FILE with FUNC (or class).
+(autoload 'python-pytest-run-def-or-class-at-point-dwim "python-pytest" "\
+Run pytest on FILE using FUNC at point as the node-id.
 
-When run interactively, this tries to work sensibly using
-the current file and function around point.
+If `python-pytest--test-file-p' returns t for FILE (i.e. the file
+is a test file), then this function results in the same behavior
+as calling `python-pytest-run-def-at-point'. If
+`python-pytest--test-file-p' returns nil for FILE (i.e. the
+current file is not a test file), then this function will try to
+find related test files and test defs (i.e. sensible match) for
+the current file and the def at point.
 
 Additional ARGS are passed along to pytest.
 With a prefix argument, allow editing.

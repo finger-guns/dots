@@ -135,10 +135,10 @@ This function can be used as an advice around an existing Capf.
 (fn CAPF)")
 (autoload 'cape-wrap-case-fold "cape" "\
 Call CAPF and return a case-insensitive completion table.
-If DONT-FOLD is non-nil return a case sensitive table instead.
-This function can be used as an advice around an existing Capf.
+If NOFOLD is non-nil return a case sensitive table instead.  This
+function can be used as an advice around an existing Capf.
 
-(fn CAPF &optional DONT-FOLD)")
+(fn CAPF &optional NOFOLD)")
 (autoload 'cape-wrap-noninterruptible "cape" "\
 Call CAPF and return a non-interruptible completion table.
 This function can be used as an advice around an existing Capf.
