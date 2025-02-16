@@ -12,12 +12,11 @@
 (autoload 'consult-completion-in-region "consult" "\
 Use minibuffer completion as the UI for `completion-at-point'.
 
-The function is called with 4 arguments: START END COLLECTION
-PREDICATE.  The arguments and expected return value are as
-specified for `completion-in-region'.  Use this function as a
-value for `completion-in-region-function'.
+The arguments START, END, COLLECTION and PREDICATE and expected return
+value are as specified for `completion-in-region'.  Use this function as
+a value for `completion-in-region-function'.
 
-(fn START END COLLECTION &optional PREDICATE)")
+(fn START END COLLECTION PREDICATE)")
 (autoload 'consult-outline "consult" "\
 Jump to an outline heading, obtained by matching against `outline-regexp'.
 
@@ -112,9 +111,9 @@ If no MODES are specified, use currently active major and minor modes.
 Select STRING from the kill ring and insert it.
 With prefix ARG, put point at beginning, and mark at end, like `yank' does.
 
-This command behaves like `yank-from-kill-ring' in Emacs 28, which also offers
-a `completing-read' interface to the `kill-ring'.  Additionally the Consult
-version supports preview of the selected string.
+This command behaves like `yank-from-kill-ring', which also offers a
+`completing-read' interface to the `kill-ring'.  Additionally the
+Consult version supports preview of the selected string.
 
 (fn STRING &optional ARG)" t)
 (autoload 'consult-yank-pop "consult" "\
@@ -123,9 +122,9 @@ If there is a recent yank act like `yank-pop'.
 Otherwise select string from the kill ring and insert it.
 See `yank-pop' for the meaning of ARG.
 
-This command behaves like `yank-pop' in Emacs 28, which also offers a
-`completing-read' interface to the `kill-ring'.  Additionally the Consult
-version supports preview of the selected string.
+This command behaves like `yank-pop', which also offers a
+`completing-read' interface to the `kill-ring'.  Additionally the
+Consult version supports preview of the selected string.
 
 (fn &optional ARG)" t)
 (autoload 'consult-yank-replace "consult" "\
@@ -133,8 +132,6 @@ Select STRING from the kill ring.
 
 If there was no recent yank, insert the string.
 Otherwise replace the just-yanked string with the selected string.
-
-There exists no equivalent of this command in Emacs 28.
 
 (fn STRING)" t)
 (autoload 'consult-bookmark "consult" "\

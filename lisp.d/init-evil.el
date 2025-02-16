@@ -3,12 +3,20 @@
 ;;; get evil son.
 ;;; Code:
 
+(global-unset-key (kbd "C-h"))
+
 (use-package evil
   :ensure t
   :demand t
-  :bind (
-         ("C-u" . evil-scroll-up)
-         ("C-d" . evil-scroll-down))
+  :bind (("C-u" . evil-scroll-up)
+         ("C-d" . evil-scroll-down)
+         ("C-h" . nil)
+         ("C-h m" . nil)
+         ("C-h i" . nil)
+         ("C-h C-h" . nil)
+         ("C-h n" . nil)
+         ("C-h C-m" . nil)
+         ("C-h t" . nil))
   :config
   (unbind-key "C-z" evil-normal-state-map)
   (define-key evil-motion-state-map (kbd "C-z") 'nil)

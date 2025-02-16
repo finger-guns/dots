@@ -14,14 +14,14 @@
   :defer t
   :ensure t)
 
-(use-package csv-mode
-  :defer t
-  :ensure t)
+;(use-package csv-mode
+;  :defer t
+;  :ensure t)
 
-(use-package gleam-ts-mode
-  :straight (:host github :repo "gleam-lang/gleam-mode")
-  :mode ("\\.gleam\\'" . gleam-ts-mode))
-  )
+;; (use-package gleam-ts-mode
+;;   :straight (:host github :repo "gleam-lang/gleam-mode")
+;;   :mode ("\\.gleam\\'" . gleam-ts-mode))
+;;   )
 
 (load (expand-file-name "~/.quicklisp/slime-helper.el"))
 (setq inferior-lisp-program "sbcl")

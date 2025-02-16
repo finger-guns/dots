@@ -1,123 +1,36 @@
 ls
-mkdir [id]
+mv auth Auth
+mv auth _Auth
+mv _Auth Auth
 ls
-cd ../
-touch queries/.empty
-tree
-tree -la
-touch insert.py
-touch update.py
-touch delete.py
+rm -rf \ Contacts.tsx 
 ls
-mkdir user
-mkdir workspace
-mkdir project
-touch insert.py
-touch delete.py
-touch update.py
-rg (menu-project)
-rg "(menu-project"
-rg "(menu-project)"
-mkdir user
 ls
-mv test_user_delete.py test_user_insert.py test_user_update.py ./user/ 
 ls
-tree
-rm -rf __pycache__/
 ls
-cd ../queries
+mv database.yml config/
 ls
-mkdir user
+ls config/database.yml
 ls
-cd user/ 
-touch test_user_get.py
-(concat (user-emacs-directory "hello"))
-locate-user-emacs-file .m2/ 
-(concat (locate-user-emacs-file "Hello"))
-(concat (user-emacs-directory "hello"))
-(esy/process-env-to-exec-path(esy/opam--process-environment-of-project(esy/project--of-path "/Users/finger__guns/projects/Personal/StreamChecker/stream_checker")))
-cd ../
+mv sign_up_* ./sign_up/ 
 ls
-esy build
-esy dune build
 (require 'project)
-(project-root)
-(setq project-root "./")
-(project-root)
-(help project-root)
+(defun current-project-root ()    "Get the current project root or default to the current directory."    (let ((project (project-current nil)))      (if project          (file-name-as-directory (project-root project))        (file-name-as-directory default-directory)))) ;; Fallback to current directory
+(current-project-root)
 ls
-mv credit_active.py credit_package.py credit_purchase.py ./credit/ 
-ls
-(straight-use-package '(lsp-tailwindcss :type git :host github :repo "merrickluo/lsp-tailwindcss"))
-(M-x)
-ls
-mv test.py scripts/request_downloader.py
-ls
-cd ../
-mkdir Sidebar
-mv navigation/Sidebar.svelte  ./Sidebar/ 
-ls
-mv Sidebar/ sidebare
-mv sidebare/ sidebar
-mv context.tsx ../
-(treesit-language-available-p 'python)
+mv *.go ./gols
 ls
 ls
-cd repos/
-ls
-rm -rf gleam-mode/
-git clone --recurse-submodules git@github.com:gleam-lang/gleam-mode
-ls
-rm -rf tree-sitter-gleam/
-ls
-gleam new whereisit
-git add .
-git init
-git add .
-rm -rf .git/
-ls
-cd whereisit/
-ls
-git init
-git add .
-git commit -m "ignore"
-(unbind-key "C-h")
-ls
-mv preperation.py insert.py
+mv search_strat.py search_strategy.py 
 ls
 cd ../
 ls
-cd services/
-mv database ../utils/
-(treesit-language-available-p 'python)
-(treesit-language-available-p 'go)
-(treesit-language-available-p 'go)
-(treesit-language-available-p 'go-lang)
-(treesit-language-available-p 'go-mode)
-ls
-cd ../
-ls
-cd tree-sitter/ 
-ls
-tree -la
-│   │   ├── pre-merge-commit.sample
-clear
-tree
-ls
-poetry init
-ls
-mkdir api
-touch api/main.py
-ls
-mv swap_background_request.py swap_background.py
-ls
-mv user_schema.py user.py
-ls
-mv start.sh ../
-ls
-Boards  CreateBoard.tsx  Navbar.tsxcode
-code .
-ls
-touch index.ts
-touch commands.ts queries.ts
-touch index.ts queries.ts commands.ts
+mv slack.py teams.py ./chat/ 
+(require 'treesit)
+(defun list-functions ()(interactive))
+(defun list-functions ()(interactive))
+(defun my-treesit-list-functions ()  "List all functions in the current buffer with their line numbers using Tree-sitter."  (interactive)  (if (not (treesit-parser-create))      (message "Tree-sitter is not available for this mode.")    (let* ((node (treesit-buffer-root-node))           (functions (treesit-query-capture                       node                       ;; Adjust the query based on the language you're using                       (pcase major-mode                         ('c-mode "(function_definition) @function")                         ('python-mode "(function_definition name: (identifier) @function-name)")                         ('javascript-mode "(function_declaration name: (identifier) @function-name)")                         (_ (error "Unsupported major mode for function listing"))))))      (with-output-to-temp-buffer "*Tree-sitter Functions*"        (princ (format "%-6s %s\n" "Line" "Function"))        (princ (make-string 50 ?-))        (princ "\n")        (dolist (match functions)          (let* ((function-node (cdr match))                 (function-name (treesit-node-text function-node))                 (line (treesit-node-start-line function-node)))            (princ (format "%-6d %s\n" line function-name)))))))))
+(require 'treesit)
+(defun my-treesit-list-functions ()  "List all functions in the current buffer with their line numbers using Tree-sitter."  (interactive)  (if (not (treesit-parser-create))      (message "Tree-sitter is not available for this mode.")    (let* ((node (treesit-buffer-root-node))           (functions (treesit-query-capture                       node                       ;; Adjust the query based on the language you're using                       (pcase major-mode                         ('c-mode "(function_definition) @function")                         ('python-mode "(function_definition name: (identifier) @function-name)")                         ('javascript-mode "(function_declaration name: (identifier) @function-name)")                         (_ (error "Unsupported major mode for function listing"))))))      (with-output-to-temp-buffer "*Tree-sitter Functions*"        (princ (format "%-6s %s\n" "Line" "Function"))        (princ (make-string 50 ?-))        (princ "\n")        (dolist (match functions)          (let* ((function-node (cdr match))                 (function-name (treesit-node-text function-node))                 (line (treesit-node-start-line function-node)))            (princ (format "%-6d %s\n" line function-name)))))))))
+(require 'treesit)
+(defun my-treesit-list-functions ()  "List all functions in the current buffer with their line numbers using Tree-sitter."  (interactive)  (if (not (treesit-parser-create))      (message "Tree-sitter is not available for this mode.")    (let* ((node (treesit-buffer-root-node))           (functions (treesit-query-capture                       node                       ;; Adjust the query based on the language you're using                       (pcase major-mode                         ('c-mode "(function_definition) @function")                         ('python-mode "(function_definition name: (identifier) @function-name)")                         ('javascript-mode "(function_declaration name: (identifier) @function-name)")                         (_ (error "Unsupported major mode for function listing"))))))      (with-output-to-temp-buffer "*Tree-sitter Functions*"        (princ (format "%-6s %s\n" "Line" "Function"))        (princ (make-string 50 ?-))        (princ "\n")        (dolist (match functions)          (let ((function-node (cdr match)))            (let ((function-name (treesit-node-text function-node))                  (line (treesit-node-start-line function-node)))              (princ (format "%-6d %s\n" line function-name)))))))))

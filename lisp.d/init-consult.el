@@ -33,11 +33,11 @@
   (setq consult-narrow-key "<")
 )
 
-(use-package embark-consult
-  :ensure t
-  :after (embark consult)
-  :hook
-  (embark-collect-mode . consult-preview-at-point-mode))
+;; (use-package embark-consult
+;;   :ensure t
+;;   :after (embark consult)
+;;   :hook
+;;   (embark-collect-mode . consult-preview-at-point-mode))
 
 ;(use-package deadgrep
 ;  :ensure t

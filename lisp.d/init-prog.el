@@ -10,7 +10,12 @@
     (fundemental-mode -1)
     (which-function-mode -1)))
 
+(use-package hideshow
+  :hook (prog-mode . hs-minor-mode)
+  :diminish hs-minor-mode)
+
 (use-package prog-mode
+  :hook (prog-mode . hs-minor-mode)
   :init
   (setq-default indent-tabs-mode nil
                 tab-width 2
@@ -22,10 +27,6 @@
 
 (use-package electric
   :hook ((prog-mode . electric-indent-mode)))
-
-;; (use-package ws-butler
-;;   :straight t
-;;   :hook (prog-mode . ws-butler-mode))
 
 (provide 'init-prog)
 ;;; init-prog.el ends here.

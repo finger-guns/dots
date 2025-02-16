@@ -30,6 +30,7 @@
   :config
   (setq completion-category-overrides '((eglot (styles orderless))))
   :init
+  (setq corfu-quit-no-match t)
   (setq completion-cycle-threshold 3
 	read-extended-command-predicate #'command-completion-default-include-p))
 
@@ -46,27 +47,10 @@
 (use-package s
   :ensure t)
 
-
-(use-package copilot
-  :ensure t
-  :straight (:host github :repo "zerolfx/copilot.el" :files ("dist" "*.el"))
-  ;; :hook (prog-mode . copilot-mode)
-  :bind (
-         ("M-y" . copilot-accept-completion-by-line)
-         ("M-Y" . copilot-accept-completion)
-         ("M-J" . copilot-next-completion)
-         ("M-K" . copilot-previous-completion)
-         ("M->" . copilot-next-completion)
-         ("M-<" . copilot-previous-completion)
-         )
-  )
-
-(use-package kind-icon
-  :ensure t
-  :diminish t
-  :after corfu
+(use-package emacs
   :custom
-  (kind-icon-use-icons t))
+  (tab-always-indent 'complete))
+
 
 (use-package tempel
   :ensure t

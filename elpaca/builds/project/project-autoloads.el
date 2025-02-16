@@ -18,7 +18,8 @@ else prompt the user for the project to use.  To prompt for a
 project, call the function specified by `project-prompter', which
 returns the directory in which to look for the project.  If no
 project is found in that directory, return a \"transient\"
-project instance.
+project instance.  When MAYBE-PROMPT is a string, it's passed to the
+prompter function as an argument.
 
 The \"transient\" project instance is a special kind of value
 which denotes a project rooted in that directory and includes all
@@ -74,6 +75,14 @@ requires quoting, e.g. `\\[quoted-insert]<space>'.
 Find all matches for REGEXP in the project roots or external roots.
 
 (fn REGEXP)" t)
+(autoload 'project-root-find-file "project" "\
+Edit file FILENAME.
+
+Interactively, prompt for FILENAME, defaulting to the root directory of
+the current project.
+
+(fn FILENAME)" t)
+(function-put 'project-root-find-file 'interactive-only 'find-file)
 (autoload 'project-find-file "project" "\
 Visit a file (with completion) in the current project.
 
@@ -98,6 +107,13 @@ interactively, include all files under the project root, except
 for VCS directories listed in `vc-directory-exclusion-list'.
 
 (fn &optional INCLUDE-ALL)" t)
+(autoload 'project-find-matching-file "project" "\
+Visit the file that matches the current one, in another project.
+It will skip to the same line number as well.
+A matching file has the same file name relative to the project root.
+When called during switching to another project, this command will
+detect it and use the override.  Otherwise, it prompts for the project
+to use from the known list." t)
 (autoload 'project-find-dir "project" "\
 Start Dired in a directory inside the current project.
 
@@ -146,6 +162,11 @@ If you exit the `query-replace', you can later continue the
 (autoload 'project-compile "project" "\
 Run `compile' in the project root." t)
 (function-put 'project-compile 'interactive-only 'compile)
+(autoload 'project-recompile "project" "\
+Run `recompile' in the project root with an appropriate buffer.
+
+(fn &optional EDIT-COMMAND)" t)
+(function-put 'project-recompile 'interactive-only 'recompile)
 (autoload 'project-switch-to-buffer "project" "\
 Display buffer BUFFER-OR-NAME in the selected window.
 When called interactively, prompts for a buffer belonging to the

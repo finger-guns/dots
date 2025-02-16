@@ -1,6 +1,4 @@
-;;; init.el --- finger__guns;
-;;; Commentary:
-;;; What should emacs do on load, and how should it do it.
+;;; init.el ---
 ;;; Code:
 
 ;; (setq debug-on-error t)
@@ -9,7 +7,6 @@
 ;;; Let emacs know where we are.
 (setq user-init-file (or load-file-name (buffer-file-name)))
 (setq user-emacs-directory (file-name-directory user-init-file))
-
 (defvar elpaca-installer-version 0.7)
 (defvar elpaca-directory (expand-file-name "elpaca/" user-emacs-directory))
 (defvar elpaca-builds-directory (expand-file-name "builds/" elpaca-directory))
@@ -27,9 +24,9 @@
     (make-directory repo t)
     (when (< emacs-major-version 28) (require 'subr-x))
     (condition-case-unless-debug err
-        (if-let ((buffer (pop-to-buffer-same-window "*elpaca-bootstrap*"))
+        (if-let* ((buffer (pop-to-buffer-same-window "*elpaca-bootstrap*"))
                  ((zerop (apply #'call-process `("git" nil ,buffer t "clone"
-                                                 ,@(when-let ((depth (plist-get order :depth)))
+                                                 ,@(when-let* ((depth (plist-get order :depth)))
                                                      (list (format "--depth=%d" depth) "--no-single-branch"))
                                                  ,(plist-get order :repo) ,repo))))
                  ((zerop (call-process "git" nil buffer t "checkout"
@@ -53,6 +50,10 @@
   (elpaca-use-package-mode))
 
 (elpaca-wait)
+
+(use-package diminish
+  :ensure t)
+
 
 ;;; Set the directories of some guff.
 (defconst my-emacs-d (file-name-as-directory user-emacs-directory)
@@ -127,6 +128,7 @@
 ;; ;;; --- Programming Modes --- {{{
 (require-init 'init-prog)
 (require-init 'init-python)
+(require-init 'init-ruby)
 (require-init 'init-go)
 (require-init 'init-docker)
 (require-init 'init-terraform)
@@ -134,6 +136,7 @@
 (require-init 'init-rust)
 (require-init 'init-ocaml)
 (require-init 'init-zig)
+(require-init 'init-elixir)
 (require-init 'init-modes-ill-rarely-use)
 
 ;;; }}}

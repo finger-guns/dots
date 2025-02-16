@@ -83,11 +83,11 @@ Delete N names before point.
 (autoload 'vertico-directory-delete-char "vertico-directory" "\
 Delete N directories or chars before point.
 
-(fn &optional N)" t)
+(fn N)" t)
 (autoload 'vertico-directory-delete-word "vertico-directory" "\
 Delete N directories or words before point.
 
-(fn &optional N)" t)
+(fn N)" t)
 (autoload 'vertico-directory-tidy "vertico-directory" "\
 Tidy shadowed file name, see `rfn-eshadow-overlay'.")
 

@@ -29,9 +29,9 @@
   :ensure t
   :hook ((tuareg-mode) . opam-switch-mode))
 
-(use-package merlin-eldoc
-  :ensure t
-  :hook ((reason-mode tuareg-mode caml-mode) . merlin-eldoc-setup))
+;; (use-package merlin-eldoc
+;;   :ensure t
+;;   :hook ((reason-mode tuareg-mode caml-mode) . merlin-eldoc-setup))
 
 (use-package utop
   :ensure t

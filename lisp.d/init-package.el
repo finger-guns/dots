@@ -22,10 +22,6 @@
 ;; (setq use-package-verbose t)
 
 
-(use-package diminish
-  :ensure t)
-
-
 (use-package async
   :ensure t
   :init
@@ -38,6 +34,11 @@
   :config
   (setq exec-path-from-shell-variables '("PATH" "GOPATH"))
   (exec-path-from-shell-initialize))
+
+(use-package direnv
+  :ensure t
+  :config
+  (direnv-mode))
 
 (provide 'init-package)
 ;;; init-package.el ends here.

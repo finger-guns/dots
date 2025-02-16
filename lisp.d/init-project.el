@@ -44,12 +44,20 @@
 
 (defun project-find-root (path)
   "Search up the PATH for `project-root-markers'."
-  (when-let ((root (locate-dominating-file path #'project-root-p)))
+  (when-let* ((root (locate-dominating-file path #'project-root-p)))
     (cons 'transient (expand-file-name root))))
 
 (use-package project
   :ensure t
   :demand t
+  :config
+  (defun project-find-go-module (dir)
+  (when-let* ((root (locate-dominating-file dir "go.mod")))
+    (cons 'go-module root)))
+  (cl-defmethod project-root ((project (head go-module)))
+    (cdr project))
+
+  (add-hook 'project-find-functions #'project-find-go-module)
   :init
   (setq project-vc-ignores '("**/node_modules/**", "**/.mypy_cache/**"))
   (setq project-mode-line t)
@@ -57,6 +65,14 @@
   (advice-add #'project-find-regexp :override #'consult-ripgrep)
   (advice-add #'project-find-file :override #'consult-find)
   (add-to-list 'project-find-functions #'project-find-root))
+
+;(use-package beframe
+;  :ensure t
+;  :demand t
+;  :init
+;  (beframe-mode t)
+;  :config
+;  (setq beframe-functions-in-frames '(project-prompt-project-dir)))
 
 (provide 'init-project)
 ;;; init-project.el ends here.
