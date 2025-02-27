@@ -1,1 +1,0 @@
-/Users/finger__guns/.config/emacs/elpaca/repos/opam-switch-mode/opam-switch-mode.el

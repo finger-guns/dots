@@ -1,1 +1,0 @@
-/Users/finger__guns/.config/emacs/elpaca/repos/esy-mode/esy-mode.el

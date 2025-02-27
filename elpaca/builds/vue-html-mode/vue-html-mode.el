@@ -1,1 +1,0 @@
-/Users/finger__guns/.config/emacs/elpaca/repos/vue-html-mode/vue-html-mode.el
