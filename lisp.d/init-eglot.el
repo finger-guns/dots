@@ -101,21 +101,91 @@
       (message "Not inside a function."))))
 
 (defun treesit-current-class-and-function-segment ()
-  "Return 'ClassName::FunctionName' for the modeline (empty string if none)."
-  (let ((class-name (treesit-current-class-name))
-        (function-name (treesit-current-function-name)))
+  "Return 'ClassName::FunctionName' with color for the modeline (empty string if none)."
+  (let* ((class-name (treesit-current-class-name))
+         (function-name (treesit-current-function-name))
+         (class-name-colored (when class-name
+                               (propertize class-name 'face '(:foreground "blue"))))
+         (function-name-colored (when function-name
+                                  (propertize function-name 'face '(:foreground "green")))))
+
     (cond
-     ((and class-name function-name)
-      (format " %s::%s " class-name function-name))
-     (class-name
-      (format " %s " class-name))
-     (function-name
-      (format " ::%s " function-name))
+     ((and class-name-colored function-name-colored)
+      (format " %s::%s " class-name-colored function-name-colored))
+     (class-name-colored
+      (format " %s " class-name-colored))
+     (function-name-colored
+      (format " %s " function-name-colored))
      (t ""))))
+
+(defun treesit-get-indentation-info ()
+  "Return a plist with the max indentation level in the current function 
+   and the indentation level of the current line using Tree-sitter."
+  (when (treesit-available-p)
+    (let* ((root (treesit-buffer-root-node))
+           (current-pos (point))
+           (current-line (line-number-at-pos))
+           (max-depth 0)
+           (current-line-depth 0)
+           (function-node (treesit-node-at current-pos))
+           ;; Define common function node types across multiple languages
+           (function-types '("function_definition"  ; Python
+                             "function_declaration" "method_definition" "arrow_function"  ; JS/TS
+                             "function_declaration" "method_declaration")))  ; Go
+
+      ;; Find the nearest enclosing function-like node
+      (while (and function-node
+                  (not (member (treesit-node-type function-node) function-types)))
+        (setq function-node (treesit-node-parent function-node)))
+
+      (when function-node
+        (cl-labels ((traverse (node depth)
+                              (setq max-depth (max max-depth depth))
+                              ;; Check if the current line is within this node
+                              (when (= (line-number-at-pos (treesit-node-start node)) current-line)
+                                (setq current-line-depth depth))
+                              (dolist (child (treesit-node-children node))
+                                (let ((child-type (treesit-node-type child)))
+                                  (traverse child
+                                            (if (member child-type '("block" "suite" "statement_block"))  ; Indented blocks
+                                                (1+ depth)
+                                              depth))))))
+          (traverse function-node 0)))
+
+      ;; Return the result as a plist
+      (list :max-depth max-depth :current-line-depth current-line-depth))))
+
+(defun treesit-indentation-info ()
+  "Echo the maximum indentation level in the current function 
+   and the indentation level of the current line using Tree-sitter."
+  (interactive)
+  (let ((info (treesit-get-indentation-info)))
+    (if info
+        (message "Max indentation depth: %d | Current line depth: %d"
+                 (plist-get info :max-depth) (plist-get info :current-line-depth))
+      (message "No function found at point."))))
+
+(defun treesit-indentation-modeline-segment ()
+  "Return a mode-line segment showing the current function's indentation levels.
+   - If current indentation ≥ 3, it turns yellow.
+   - If max indentation > 3, it turns red."
+  (let ((info (treesit-get-indentation-info)))
+    (if info
+        (let* ((current (plist-get info :current-line-depth))
+               (max-depth (plist-get info :max-depth))
+               (color (cond
+                       ((> max-depth 3) "red")
+                       ((>= current 3) "yellow")
+                       (t "white")))
+               (formatted (format "%d/%d" current max-depth)))
+          (propertize formatted 'face `(:foreground ,color)))
+      ""))) ;; Return empty string if no function found
 
 (setq-default mode-line-format
               (append mode-line-format
-                      '((:eval (treesit-current-class-and-function-segment)))))
+                      '((:eval (treesit-current-class-and-function-segment))
+                        (:eval (treesit-indentation-modeline-segment)))))
+
 
 (provide 'init-eglot)
 ;;; init-eglot.el ends here.
