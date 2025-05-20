@@ -24,6 +24,7 @@
    "l" 'consult-line
    "g" 'consult-ripgrep
    "f" 'consult-find
+   "b" 'consult-project-buffer
    "r" 'eglot-rename
    "f" 'eglot-format
    "h" 'eglot-help-at-point

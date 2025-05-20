@@ -58,10 +58,10 @@
     (cdr project))
 
   (add-hook 'project-find-functions #'project-find-go-module)
-  :init
-  (setq project-vc-ignores '("**/node_modules/**", "**/.mypy_cache/**"))
-  (setq project-mode-line t)
+  (setq project-vc-ignores '("node_modules" ".mypy_cache" "dist" "__pycache__" ".venv"))
 
+  :init
+  (setq project-mode-line t)
   (advice-add #'project-find-regexp :override #'consult-ripgrep)
   (advice-add #'project-find-file :override #'consult-find)
   (add-to-list 'project-find-functions #'project-find-root))

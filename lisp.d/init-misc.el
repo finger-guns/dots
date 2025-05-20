@@ -3,113 +3,86 @@
 ;;; A whole bunch of misc settings for emacs.
 ;;; Code:
 
-
-;; load .dir-locals.el by default
+;; Load .dir-locals.el by default
 (setq-default enable-local-variables t)
 
-;; nuber of bytes to read from subprocess
+;; Number of bytes to read from subprocesses (helps with LSP)
 (setq read-process-output-max (* 2048 2048))
 
-;; Stop warning me about every god damn thing, this is really useful for lsp things, should just re write that in lsp.el to set the default error level to be higher.
+;; Suppress unnecessary warnings (e.g. from LSP/compilation)
 (setq warning-minimum-level :emergency)
-(setq warning-suppress-log-types `((comp)))
+(setq warning-suppress-log-types '((comp)))
 
-;; Garbage collect whenever the window loses focus.
+;; Garbage collect on window blur
 (add-hook 'focus-out-hook #'garbage-collect)
 
-;; Don't open with splits
+;; Don't start Emacs with split windows
 (add-hook 'window-setup-hook #'delete-other-windows)
 
-;; Tell emacs where to put the custom/autoset settings, this stops init.el being flooded.
+;; Separate custom.el to avoid polluting init.el
 (setq custom-file (concat user-emacs-directory "/custom.el"))
 
-;; Just follow shit.
+;; Follow symlinks without prompting
 (setq vc-follow-symlinks t)
 
-;; Delete items to the trash.
+;; Use trash instead of deleting permanently
 (setq trash-directory "~/.Trash"
       delete-by-moving-to-trash t)
 
-;; Always use x clipboard.
-(setq  x-select-enable-clipboard t)
+;; Always use system clipboard
+(setq x-select-enable-clipboard t)
 
-;; Let's not complain about big files.
+;; Disable large file warnings
 (setq large-file-warning-threshold nil)
 
-;; Avoid the end of buffer error.
+;; Avoid creating newlines at EOF
 (setq next-line-add-newlines nil)
 
-;; Always try and load the newer version of the file.
-;; (setq load-prefer-newer t)
-
-;; Load the tool tip quicker and nicer.
+;; Tooltips: faster display
 (setq tooltip-delay 1.5)
 
-;; Don't shorten names or anything.
+;; Don't canonicalize filenames (faster file finding)
 (setq find-file-use-truenames nil
       find-file-compare-truenames t)
 
-;; Complete what can be and don't complain about it!
-(setq minibuffer-max-depth nil
-      minibuffer-comfirm-incomplete t)
+;; Kill behavior
+(setq kill-whole-line t
+      kill-read-only-ok t)
 
-;; Kill everything.
-(setq  kill-whole-line t
-       kill-read-only-ok t)
-
-;; Don't start up with a fancy slash screen, just give me org with a message.
+;; Startup screen/message settings
 (setq inhibit-splash-screen t
       initial-scratch-message ";; Welcome back to Emacs"
       initial-major-mode 'emacs-lisp-mode)
 
-;; ;; Store all backup and autosave files in the tmp dir.
-;; (setq backup-directory-alist
-;;       `((".*" . ,temporary-file-directory)))
-;; (setq auto-save-file-name-transforms
-;;       `((".*" ,temporary-file-directory t)))
-
-:; just fuck out of here with this.
-(setq make-backup-files nil)
-(setq create-lockfiles nil)
+;; Disable lockfiles and backups in working dirs
+(setq make-backup-files nil
+      create-lockfiles nil
+      auto-save-default nil)
 
 (defconst emacs-tmp-dir (expand-file-name (format "emacs%d" (user-uid)) temporary-file-directory))
-(setq backup-directory-alist
-    `((".*" . ,emacs-tmp-dir)))
-(setq auto-save-file-name-transforms
-    `((".*" ,emacs-tmp-dir t)))
-(setq auto-save-list-file-prefix
-    emacs-tmp-dir)
+(setq backup-directory-alist `((".*" . ,emacs-tmp-dir)))
+(setq auto-save-file-name-transforms `((".*" ,emacs-tmp-dir t)))
+(setq auto-save-list-file-prefix emacs-tmp-dir)
 
-;; Go quick but be quite about it.
+;; UI behavior
 (setq echo-keystrokes 0.1
       use-dialog-box nil
       visible-bell nil)
 
+;; Use Hunspell if available
 (when (executable-find "hunspell")
-  (setq-default ispell-program-name "hunspell")
-  (setq ispell-really-hunspell t)
-  (setq ispell-dictionary "en_AU"))
+  (setq-default ispell-program-name "hunspell"
+                ispell-really-hunspell t
+                ispell-dictionary "en_AU"))
 
+;; Clean up *Completions* buffer automatically (or better: suppress it)
+(setq completion-auto-help 'lazy)
 
-;;; Remove a buffer called *Completions*.
-(defun config--cleanup-completions-buffer ()
-  (when-let* ((buf (get-buffer "*Completions*")))
-    (kill-buffer buf)))
-
-(add-hook 'minibuffer-exit-hook #'config--cleanup-completions-buffer)
-
-;;; Don't save dups.
+;; Prevent saving duplicate kills
 (setq kill-do-not-save-duplicates t)
 
-;;; Don't show q to quit window.
+;; Suppress "Press q to quit" message in help windows
 (advice-add 'help-window-display-message :override #'ignore)
-
-(defun undo-auto--undoable-change ()
-"Called after every undoable buffer change."
-;; (add-to-list 'undo-auto--undoably-changed-buffers (current-buffer))
-;; (undo-auto--boundary-ensure-timer)
-)
-(setq timer-list (delq 'undo-auto--boundary-timer timer-list))
 
 (provide 'init-misc)
 ;;; init-misc.el ends here.

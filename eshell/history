@@ -37,3 +37,22 @@ mv slack.py teams.py ./chat/
 (defun treesit-indentation-info ()  "Return the maximum indentation level in the current function    and the indentation level of the current line using Tree-sitter."  (interactive)  (if (not (treesit-available-p))      (message "Tree-sitter is not available")    (let* ((root (treesit-buffer-root-node))           (current-pos (point))           (current-line (line-number-at-pos))           (max-depth 0)           (current-line-depth 0)           (function-node (treesit-node-at current-pos)))      ;; Find the nearest enclosing Python function definition      (while (and function-node                  (not (string= (treesit-node-type function-node) "function_definition")))        (setq function-node (treesit-node-parent function-node)))      (if (not function-node)          (message "No Python function found at point")        (cl-labels ((traverse (node depth)                              (setq max-depth (max max-depth depth))                              ;; Check if the current line is within this node                              (when (= (line-number-at-pos (treesit-node-start node)) current-line)                                (setq current-line-depth depth))                              (dolist (child (treesit-node-children node))                                (let ((child-type (treesit-node-type child)))                                  (traverse child                                            (if (member child-type '("block" "suite"))  ; Indented blocks in Python                                                (1+ depth)                                              depth))))))          (traverse function-node 0))        (message "Max indentation depth in function: %d | Current line depth: %d"                 max-depth current-line-depth)        (list :max-depth max-depth :current-line-depth current-line-depth)))))
 clear
 (defun treesit-indentation-info ()  "Return the maximum indentation level in the current function    and the indentation level of the current line using Tree-sitter."  (interactive)  (if (not (treesit-available-p))      (message "Tree-sitter is not available")    (let* ((root (treesit-buffer-root-node))           (current-pos (point))           (current-line (line-number-at-pos))           (max-depth 0)           (current-line-depth 0)           (function-node (treesit-node-at current-pos))           ;; Define common function node types across multiple languages           (function-types '("function_definition"  ; Python                             "function_declaration" "method_definition" "arrow_function"  ; JS/TS                             "function_declaration" "method_declaration")))  ; Go      ;; Find the nearest enclosing function-like node      (while (and function-node                  (not (member (treesit-node-type function-node) function-types)))        (setq function-node (treesit-node-parent function-node)))      (if (not function-node)          (message "No function found at point")        (cl-labels ((traverse (node depth)                              (setq max-depth (max max-depth depth))                              ;; Check if the current line is within this node                              (when (= (line-number-at-pos (treesit-node-start node)) current-line)                                (setq current-line-depth depth))                              (dolist (child (treesit-node-children node))                                (let ((child-type (treesit-node-type child)))                                  (traverse child                                            (if (member child-type '("block" "suite" "statement_block"))  ; Indented blocks                                                (1+ depth)                                              depth))))))          (traverse function-node 0))        (message "Max indentation depth in function: %d | Current line depth: %d"                 max-depth current-line-depth)        (list :max-depth max-depth :current-line-depth current-line-depth)))))
+ls
+ls
+ls
+uv add boto3
+cd ../
+cd ../
+ls
+uv add boto3
+ls
+mv test_user_commands.py ./commands/ 
+mkdir queries
+mv test_user_queries.py ./queries/ 
+ls
+mv compose.workers.yaml compose.workers.yml
+ls
+mv grammar310.txt grammar313.txt
+ls
+mv utils ../
+ls

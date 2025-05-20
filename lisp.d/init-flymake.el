@@ -16,6 +16,7 @@
   (setq flymake-diagnostic-functions '(eglot-flymake-backend))
 
   :config
+  (setq flymake-show-diagnostics-at-end-of-line 'short)
   (setq flymake-no-changes-timeout 0.1))
 
 (provide 'init-flymake)

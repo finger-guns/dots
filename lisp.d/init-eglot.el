@@ -3,48 +3,54 @@
 ;;; eglot is the new thing.
 
 
-(use-package dape
-  :ensure (dape
-             :type git
-             :host github
-             :repo "svaante/dape")
-  :config
-  (setq dape-inline-variables t)
+;; (use-package dape
+;;   :ensure (dape
+;;              :type git
+;;              :host github
+;;              :repo "svaante/dape")
+;;   :config
+;;   (setq dape-inline-variables t)
 
-  (defun get-project-root ()
-    "Get the current project root as a string, or return the `default-directory` if not in a project."
-    (or (when-let ((project (project-current nil)))  ;; Avoid prompting with `nil`
-          (project-root project))                   ;; Return project root if found
-        default-directory))                         ;; Fallback to current directory
-  (add-to-list 'dape-configs
-               `(debugpy-remote-attach-port
-                 modes (python-mode python-ts-mode)
-                 host (lambda () (read-string "Host: " "localhost"))
-                 port (lambda () (read-number "Port: "))
-                 :request "attach"
-                 :type "python"
-                 :pathMappings [(:localRoot (lambda ()
-                                              (read-directory-name "Local source directory: "
-                                                                   (funcall dape-cwd-fn)))
-                                            :remoteRoot (lambda ()
-                                                          (read-string "Remote source directory: ")))]
-                 :justMyCode nil
-                 :showReturnValue t))
-  )      
+;;   (defun get-project-root ()
+;;     "Get the current project root as a string, or return the `default-directory` if not in a project."
+;;     (or (when-let ((project (project-current nil)))  ;; Avoid prompting with `nil`
+;;           (project-root project))                   ;; Return project root if found
+;;         default-directory))                         ;; Fallback to current directory
+;;   (add-to-list 'dape-configs
+;;                `(debugpy-remote-attach-port
+;;                  modes (python-mode python-ts-mode)
+;;                  host (lambda () (read-string "Host: " "localhost"))
+;;                  port (lambda () (read-number "Port: "))
+;;                  :request "attach"
+;;                  :type "python"
+;;                  :pathMappings [(:localRoot (lambda ()
+;;                                               (read-directory-name "Local source directory: "
+;;                                                                    (funcall dape-cwd-fn)))
+;;                                             :remoteRoot (lambda ()
+;;                                                           (read-string "Remote source directory: ")))]
+;;                  :justMyCode nil
+;;                  :showReturnValue t))
+;;   )      
 
 (use-package eglot
   :hook (prog-mode . eglot-ensure)
-  :config
-  (setq eglot-events-buffer-size 0)
-  (setq eldoc-idle-delay 0.75)
-  (advice-add #'eglot-completion-at-point :around #'cape-wrap-noninterruptible)
-  (setq eglot-events-buffer-size 2000000)
-  (setq eglot-extend-to-xref t)
-  (add-to-list 'eglot-server-programs '(gleam-ts-mode . ("gleam" "lsp")))
-  (add-to-list 'eglot-server-programs
-               '(enh-ruby-mode . ("bundle" "exec" "ruby-lsp"))) ;; Use Ruby LSP from the project's bundle
-  )
 
+  :config
+  ;; Core Eglot settings
+  (setq eglot-events-buffer-size 2000000
+        eglot-connect-timeout 10
+        eglot-report-progress nil
+        eglot-extend-to-xref t
+        eldoc-idle-delay 0.75)
+
+  ;; Non-interruptible completions via cape
+  (advice-add #'eglot-completion-at-point :around #'cape-wrap-noninterruptible)
+
+  ;; Custom language server mappings
+  (setq eglot-server-programs
+        (append eglot-server-programs
+                '((gleam-ts-mode . ("gleam" "lsp"))
+                  (enh-ruby-mode . ("bundle" "exec" "ruby-lsp"))))))
 
 
 (use-package treesit
@@ -166,20 +172,21 @@
       (message "No function found at point."))))
 
 (defun treesit-indentation-modeline-segment ()
-  "Return a mode-line segment showing the current function's indentation levels.
-   - If current indentation ≥ 3, it turns yellow.
-   - If max indentation > 3, it turns red."
-  (let ((info (treesit-get-indentation-info)))
-    (if info
-        (let* ((current (plist-get info :current-line-depth))
-               (max-depth (plist-get info :max-depth))
-               (color (cond
-                       ((> max-depth 3) "red")
-                       ((>= current 3) "yellow")
-                       (t "white")))
-               (formatted (format "%d/%d" current max-depth)))
-          (propertize formatted 'face `(:foreground ,color)))
-      ""))) ;; Return empty string if no function found
+  "Return a mode-line segment showing indentation depth if Tree-sitter is active."
+  (when (and (fboundp 'treesit-ready-p)
+             (treesit-ready-p major-mode))
+    (let ((info (treesit-get-indentation-info)))
+      (if info
+          (let* ((current (plist-get info :current-line-depth))
+                 (max-depth (plist-get info :max-depth))
+                 (color (cond
+                         ((> max-depth 3) "red")
+                         ((>= current 3) "yellow")
+                         (t "white")))
+                 (formatted (format "%d/%d" current max-depth)))
+            (propertize formatted 'face `(:foreground ,color)))
+        ""))))
+
 
 (setq-default mode-line-format
               (append mode-line-format

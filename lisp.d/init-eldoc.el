@@ -2,6 +2,8 @@
 ;;; Commentary:
 ;;; eldoc.
 
+;;; Code:
+
 (use-package eldoc-box
   :ensure t
   :diminish ""
@@ -10,11 +12,13 @@
   :config
   (setq eldoc-echo-area-use-multiline-p t)
   (diminish 'eldoc-box-hover-mode "")
-  (diminish 'eldoc-box-hover-at-point-mode "")
-  )
+  (diminish 'eldoc-box-hover-at-point-mode ""))
 
 (use-package eldoc
-  :diminish ":edoc:")
+  :diminish ":edoc:"
+  :custom (when (fboundp 'eldoc-documentation-compose-single)
+  (setq eldoc-documentation-strategy #'eldoc-documentation-compose-single))
+  )
 
 (provide 'init-eldoc)
 ;;; init-eldoc.el ends here
