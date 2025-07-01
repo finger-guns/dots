@@ -3,11 +3,16 @@
 ;;; just trying out elixir mode
 ;;; code:
 
+(setq major-mode-remap-alist
+      '((elixir-mode . elixir-ts-mode)))
 
-(use-package elixir-mode
+
+(use-package elixir-ts-mode
   :ensure t
+  :mode ("\\.ex\\'" "\\.exs\\'")
   :config
   (setq elixir-indent-level 2))
+
 
 ;; (use-package mix
 ;;     :ensure t

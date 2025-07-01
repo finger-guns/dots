@@ -31,10 +31,11 @@
 ;;                  :justMyCode nil
 ;;                  :showReturnValue t))
 ;;   )      
-
 (use-package eglot
-  :hook (prog-mode . eglot-ensure)
-
+  :hook ((prog-mode
+          elixir-mode
+          elixir-ts-mode
+          heex-ts-mode) . eglot-ensure)
   :config
   ;; Core Eglot settings
   (setq eglot-events-buffer-size 2000000
@@ -46,11 +47,12 @@
   ;; Non-interruptible completions via cape
   (advice-add #'eglot-completion-at-point :around #'cape-wrap-noninterruptible)
 
-  ;; Custom language server mappings
   (setq eglot-server-programs
-        (append eglot-server-programs
-                '((gleam-ts-mode . ("gleam" "lsp"))
-                  (enh-ruby-mode . ("bundle" "exec" "ruby-lsp"))))))
+	(append eglot-server-programs
+		`((gleam-ts-mode . ("gleam" "lsp"))
+		  (enh-ruby-mode . ("bundle" "exec" "ruby-lsp"))
+		  ((elixir-mode elixir-ts-mode heex-ts-mode)
+		   . ("language_server.sh"))))))
 
 
 (use-package treesit
@@ -58,11 +60,14 @@
   (defun mp-setup-install-grammars ()
     "Install Tree-sitter grammars if they are absent."
     (interactive)
+    
     (dolist (grammar
              '((tsx . ("https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src"))
                (typescript . ("https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src"))
                (yaml . ("https://github.com/ikatyang/tree-sitter-yaml" "master"))
-               (python . ("https://github.com/tree-sitter/tree-sitter-python" "master"))))
+               (python . ("https://github.com/tree-sitter/tree-sitter-python" "master"))
+               (heex . ("https://github.com/phoenixframework/tree-sitter-heex"))
+               (elixir . ("https://github.com/elixir-lang/tree-sitter-elixir"))))
       (add-to-list 'treesit-language-source-alist grammar)
       (unless (treesit-language-available-p (car grammar))
         (treesit-install-language-grammar (car grammar)))))

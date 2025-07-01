@@ -56,3 +56,9 @@ mv grammar310.txt grammar313.txt
 ls
 mv utils ../
 ls
+ls
+./create_services.sh riskradar
+./create_services.sh riskradar
+ls
+chmod +x lsp_setup.sh 
+ls

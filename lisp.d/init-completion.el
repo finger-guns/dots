@@ -15,7 +15,7 @@
   (corfu-auto-delay 0.25)
   (corfu-preview-current nil)
   (corfu-separator ?\s)
-  (corfu-quit-no-match 'separator)
+  (corfu-quit-no-match t)
   (corfu-preselect 'prompt)
   (corfu-on-exact-match nil)
   (corfu-echo-documentation nil)
