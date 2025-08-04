@@ -23,8 +23,14 @@
 ;;   :mode ("\\.gleam\\'" . gleam-ts-mode))
 ;;   )
 
-(load (expand-file-name "~/.quicklisp/slime-helper.el"))
-(setq inferior-lisp-program "sbcl")
+;; (load (expand-file-name "~/.quicklisp/slime-helper.el"))
+;; (setq inferior-lisp-program "sbcl")
+
+(use-package lua-ts-mode
+  ;; :ensure t
+  :mode ("\\.lua\\'" . lua-ts-mode)
+  )
+
 
 
 (provide 'init-modes-ill-rarely-use)

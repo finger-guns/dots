@@ -62,3 +62,8 @@ ls
 ls
 chmod +x lsp_setup.sh 
 ls
+ls
+cd ../
+source .venv/bin/activate 
+ls
+uv run ruff --fix ./user.py 

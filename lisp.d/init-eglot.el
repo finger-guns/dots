@@ -51,6 +51,7 @@
 	(append eglot-server-programs
 		`((gleam-ts-mode . ("gleam" "lsp"))
 		  (enh-ruby-mode . ("bundle" "exec" "ruby-lsp"))
+      (enh-ruby-mode . ("bundle" "exec" "srb" "tc" "--lsp" "--stripe_compat"))
 		  ((elixir-mode elixir-ts-mode heex-ts-mode)
 		   . ("language_server.sh"))))))
 

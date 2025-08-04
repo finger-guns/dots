@@ -58,7 +58,7 @@
     (cdr project))
 
   (add-hook 'project-find-functions #'project-find-go-module)
-  (setq project-vc-ignores '("node_modules" ".mypy_cache" "dist" "__pycache__" ".venv"))
+  (setq project-vc-ignores '("node_modules" ".mypy_cache" "dist" "__pycache__" ".venv", "_build", "deps"))
 
   :init
   (setq project-mode-line t)

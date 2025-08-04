@@ -10,6 +10,7 @@
   :demand t
   :bind (("C-u" . evil-scroll-up)
          ("C-d" . evil-scroll-down)
+         ("s-M" . nil)
          ("C-h" . nil)
          ("C-h m" . nil)
          ("C-h i" . nil)

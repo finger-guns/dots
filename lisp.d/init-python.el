@@ -24,5 +24,10 @@
 (use-package python-pytest
   :ensure t)
 
+(use-package pyvenv
+  :ensure t
+  :hook (python-ts-mode . pyvenv-mode))
+ 
+
 (provide 'init-python)
 ;;; init-python.el ends here.
